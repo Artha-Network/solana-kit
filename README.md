@@ -1,33 +1,64 @@
 # solana-kit
-Thin, typed client for your program (and helpers for Actions/tx building).
-```md
-# @trust-escrow/solana-kit
 
-TypeScript client SDK for the **Onchain Escrow** program:
-- Typed builders for all instructions
-- Helpers for simulation & decoding events
-- Optional React hooks for read-only queries
+TypeScript SDK for Artha Network's on-chain escrow program.
 
-## Install
+## Overview
+
+Thin, typed client library providing transaction builders and utility functions for interacting with the Artha Network escrow program on Solana.
+
+## Sprint 3 Additions
+
+This sprint added developer utilities and type safety:
+
+- **Types** (`src/types/`) - TypeScript definitions for all program structures
+- **Constants** (`src/constants/`) - Program IDs, mints, limits, and network configs  
+- **PDA Utils** (`src/utils/pda.ts`) - Derive escrow and vault addresses
+- **Formatting** (`src/utils/formatting.ts`) - Convert and display token amounts
+- **Validation** (`src/utils/validation.ts`) - Input validation with error messages
+
+## Structure
+
+```
+src/
+├── builders/       # Transaction builders (existing)
+├── clients/        # Anchor client wrapper (existing)
+├── types/          # TypeScript types (Sprint 3)
+├── constants/      # Config constants (Sprint 3)
+└── utils/          # Helper functions (Sprint 3)
+```
+
+## Usage
+
+```typescript
+import { 
+  deriveEscrowStatePDA, 
+  parseTokenAmount,
+  validateAmount,
+  PROGRAM_IDS 
+} from "@artha-network/solana-kit";
+
+// Derive PDA
+const [escrowState, bump] = deriveEscrowStatePDA(
+  seller, buyer, mint, PROGRAM_IDS.devnet
+);
+
+// Parse amounts
+const amount = parseTokenAmount("100"); // 100 USDC
+
+// Validate before sending
+const result = validateAmount(amount);
+if (!result.valid) throw new Error(result.error);
+```
+
+## Development
+
 ```bash
-pnpm add @trust-escrow/solana-kit
-API Surface
+npm install
+npm run build
+npm run type-check
+npm run lint
+```
 
-builders/: buildInitiate, buildFund, buildSubmitEvidence, buildOpenDispute, buildResolve, buildRelease, buildRefund
-
-idl/escrow.json: bundled IDL
-
-clients/escrowClient.ts: low-level Anchor client helpers
-
-hooks.ts (optional): useDeal, useBalance, etc.
-Environment
-Var	Description
-PROGRAM_ID	Escrow program address
-RPC_URL	Solana RPC endpoint
-Dev & Test
-pnpm i
-pnpm test
-# optional: spin local validator and run e2e simulations
-License
+## License
 
 MIT
