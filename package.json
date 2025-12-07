@@ -1,0 +1,50 @@
+{
+  "name": "@artha-network/solana-kit",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for Artha Network on-chain escrow program",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "solana",
+    "escrow",
+    "blockchain",
+    "web3",
+    "artha-network"
+  ],
+  "author": "Artha Network",
+  "license": "MIT",
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.32.1",
+    "@solana/web3.js": "^1.95.0",
+    "@solana/spl-token": "^0.4.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.50.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.0.0",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Artha-Network/solana-kit.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
